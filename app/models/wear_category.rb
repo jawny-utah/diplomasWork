@@ -1,0 +1,2 @@
+class WearCategory < ApplicationRecord
+end
