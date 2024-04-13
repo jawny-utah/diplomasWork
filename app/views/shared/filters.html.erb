@@ -1,0 +1,35 @@
+<div class="flex flex-col py-3 px-6">
+  <h3> Фільтри </h3>
+  <%= form_with(url: root_path, method: :get,
+                data: { controller: "filters", fitlers_target: "form", turbo_frame: "wears_table", turbo_action: "advance" }) do %>
+    <div>
+      <h4> Категорії </h4>
+      <%= radio_button_tag "subcategory", "", data: { action: "filters#submit" } %>
+      <%= label_tag "subcategory_any", "Будь-яка" %>
+      <%= render @categories %>
+    </div>
+    <div>
+      <h4> Кольори </h4>
+      <%= render partial: "shared/checkboxes_filter", collection: @colors, as: :filter_param %>
+    </div>
+    <div>
+      <h4> Бренди </h4>
+      <%= render partial: "shared/checkboxes_filter", collection: @brands, as: :filter_param %>
+    </div>
+    <div>
+      <h4> Стать </h4>
+      <div>
+        <%= radio_button_tag "sex", "", id: "sex_any", data: { action: "filters#submit" } %>
+        <%= label_tag "sex_any", "Будь-яка" %>
+      </div>
+      <div>
+        <%= radio_button_tag "sex", 0, id: "sex_male", data: { action: "filters#submit" } %>
+        <%= label_tag "sex_male", "Чоловік" %>
+      </div>
+      <div>
+        <%= radio_button_tag "sex", 1, id: "sex_female", data: { action: "filters#submit" } %>
+        <%= label_tag "sex_female", "Жінка" %>
+      </div>
+    </div>
+  <% end %>
+</div>

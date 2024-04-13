@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_02_192021) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_06_163842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brands", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "materials", force: :cascade do |t|
     t.string "name"
@@ -56,6 +74,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_192021) do
     t.index ["order_id"], name: "index_shipment_orders_on_order_id"
   end
 
+  create_table "subcategories", force: :cascade do |t|
+    t.bigint "category_id"
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
@@ -74,15 +100,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_192021) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "wear_subcategories", force: :cascade do |t|
+    t.bigint "wear_id"
+    t.bigint "subcategory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subcategory_id"], name: "index_wear_subcategories_on_subcategory_id"
+    t.index ["wear_id"], name: "index_wear_subcategories_on_wear_id"
+  end
+
   create_table "wears", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.decimal "price", null: false
-    t.string "brand"
-    t.string "color"
     t.integer "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_name"
+    t.bigint "color_id"
+    t.bigint "brand_id"
   end
 
 end
