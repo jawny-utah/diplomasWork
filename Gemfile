@@ -17,13 +17,18 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
+  gem "pry"
 end
 
 group :development do
   gem "web-console"
+  gem 'rails-erd'
 end
 
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "faker"
+gem "pagy", "~> 6.2.0"

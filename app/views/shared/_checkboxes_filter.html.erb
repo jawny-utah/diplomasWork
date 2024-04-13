@@ -1,0 +1,7 @@
+<% checkbox_name = "#{filter_param.class.to_s.downcase}_#{filter_param.to_s[20..25]}" %>
+<% current_field_parameter = params[filter_param.class.to_s.downcase] || [] %>
+
+<div>
+  <%= check_box_tag "#{filter_param.class.to_s.downcase}[]", filter_param.title, current_field_parameter.include?(filter_param.title), id: checkbox_name, data: { action: "filters#submit" } %>
+  <%= label_tag checkbox_name, filter_param.title %>
+</div>

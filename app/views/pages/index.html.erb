@@ -1,0 +1,14 @@
+<h1> Спецодяг під ключ </h1>
+
+<h3> Всі наявні товари </h3>
+<p> Всього товарів: <%= @wears.length %> </p>
+
+<div class="flex">
+  <%= render template: "shared/filters" %>
+  <%= turbo_frame_tag :wears_table, class: "flex flex-col items-center" do %>
+    <div class="flex flex-wrap gap-3">
+      <%= render @wears %>
+    </div>
+    <%= render template: "shared/pagy", locals: { pagy: @pagy } %>
+  <% end %>
+</div>

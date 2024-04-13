@@ -1,0 +1,7 @@
+<%= link_to wear_path(wear), target: "_top", class: "bg-gray-200 px-4 py-2 w-[32%]" do %>
+  <% if wear.image_name %>
+    <%= image_tag wear.image_name %>
+  <% end %>
+  <h4><%= wear.full_name %></h4>
+  <p><%= wear.formatted_price %></p>
+<% end %>

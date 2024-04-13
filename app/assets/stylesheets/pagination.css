@@ -1,0 +1,15 @@
+.pagy_nav.pagination {
+  @apply flex justify-center gap-x-2 mt-2;
+
+  .page {
+    @apply bg-transparent flex rounded-lg hover:bg-gray-200 transition font-medium text-gray-800 shadow-lg text-lg;
+  }
+
+  a, .gap {
+    @apply py-2 px-4 ;
+  }
+
+  .current, .disabled {
+    @apply py-2 px-4 select-none text-white bg-gray-700 pointer-events-none;
+  }
+}
