@@ -2,7 +2,7 @@ BRANDS = ["Delta Plus", "Carhartt", "Stedman", "Under Armour", "Gap", "Rusty", "
 COLORS = ["Червоний", "Синій", "Зелений", "Жовтий", "Чорний", "Білий", "Сірий"]
 
 BRANDS.each do |brand|
-  Brand.create(title: brand, en_title: )
+  Brand.create(title: brand)
 end
 
 COLORS.each do |color|

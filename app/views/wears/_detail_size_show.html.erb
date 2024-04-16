@@ -1,0 +1,13 @@
+<div class="flex flex-col">
+  <%= form.label "order[wear_orders_attributes][0][quantity]", "Вкажіть кількість" %>
+  <%= form.hidden_field "order[wear_orders_attributes][0][wear_id]", value: @wear.id %>
+  <%= form.hidden_field "order[user_id]", value: 1 %>
+  <%= form.text_field "order[wear_orders_attributes][0][quantity]", type: :number, value: 0, class: "default-input" %>
+  <% WearOrderDetailSize::WEAR_TYPE_MAPPING[@wear.subcategory.title].each do |size_input| %>
+    <div class="flex flex-col mt-2">
+      <%= form.label size_input, t("sizes.#{@wear.subcategory.title}.#{size_input}") %>
+      <%= form.text_field "order[wear_orders_attributes][0][wear_order_detail_size_attributes][#{size_input}]", type: :number,
+                          placeholder: "см", class: "default-input", required: true %>
+    </div>
+  <% end %>
+</div>

@@ -1,2 +1,37 @@
 <%= link_to "Back", root_path %>
-<h3><%= @wear.name %></h3>
+<div class="w-auto">
+  <div class="flex justify-center">
+    <%= image_tag @wear.image_name, class: "h-fit w-[380px]" %>
+    <%= form_with url: orders_path, method: :post, class: "ml-8", local: false, data: { turbo: false } do |form| %>
+      <h3><%= @wear.name %></h3>
+      <h4 class="mt-3 mb-8"> Ціна: <%= @wear.price %> </h4>
+      <h4>Виберіть розмір та вкажіть потрібну кількість</h4>
+      <div>
+        <% WearOrder.classic_sizes.each do |name, value| %>
+          <% classic_size_id = [name.delete("/"), value].join("_") %>
+          <div class="flex items-center" data-controller="quantity-changer">
+            <%= form.hidden_field "order[wear_orders_attributes][#{value}][wear_id]", value: @wear.id %>
+            <%= form.hidden_field "order[user_id]", value: 1 %>
+            <%= check_box_tag "order[wear_orders_attributes][#{value}][classic_size]", name, id: classic_size_id, data: { quantity_changer_target: "checkbox" } %>
+            <%= label_tag classic_size_id, name, class: "ml-2" %>
+            <div class='flex items-center ml-8'>
+              <button type="button" class='py-1 px-3 rounded-md bg-slate-400' data-action="click->quantity-changer#minus">-</button>
+              <%= text_field_tag "order[wear_orders_attributes][#{value}][quantity]", 0, class: "p-2 w-9", data: { quantity_changer_target: "quantity" }%>
+              <button type="button" class='py-1 px-3 rounded-md bg-slate-300' data-action="click->quantity-changer#plus">+</button>
+            </div>
+          </div>
+        <% end %>
+        <%= form.submit "Купити", data: { url: show_cart_modal_orders_path, action: "click->open-modal#view" } %>
+      </div>
+    <% end %>
+    <%= form_with url: new_order_path, method: :get, class: "ml-8", remote: true do |form| %>
+      <h4 class="mt-5 my-1"> Або вкажіть власні заміри </h4>
+      <%= render partial: "wears/detail_size_show", locals: { form: form } %>
+      <button data-action="click->open-modal#view" data-url=<%new_order_path%> type="button"> Купити </button>
+    <% end %>
+  </div>
+  <div>
+    <h3>Опис</h3>
+    <p><%= @wear.description %> </p>
+  </div>
+</div>

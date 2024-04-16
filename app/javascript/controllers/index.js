@@ -9,3 +9,9 @@ application.register("hello", HelloController)
 
 import FiltersController from "./filters_controller"
 application.register("filters", FiltersController)
+
+import QuantityChangersController from "./quantity_changers_controller"
+application.register("quantity-changer", QuantityChangersController)
+
+import OpenModalsController from "./open_modal_controller"
+application.register("open-modal", OpenModalsController)

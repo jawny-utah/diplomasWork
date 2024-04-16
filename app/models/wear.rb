@@ -5,6 +5,7 @@ class Wear < ApplicationRecord
   has_one :wear_subcategory
   has_one :subcategory, through: :wear_subcategory
   has_one :category, through: :subcategory
+  has_many :wear_order, dependent: :destroy
   belongs_to :brand
   belongs_to :color
 

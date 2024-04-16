@@ -1,0 +1,7 @@
+.default-input {
+  @apply border border-gray-400 px-3 py-1 max-w-sm;
+}
+
+input[type="submit"] {
+  @apply bg-blue-400 text-white font-semibold text-2xl px-3 py-1 rounded-md cursor-pointer;
+}
