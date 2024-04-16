@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_06_163842) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_134446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,15 +53,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_163842) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "wear_id"
-    t.integer "quantity", null: false
     t.integer "status", default: 0
-    t.integer "payment_type", null: false
+    t.integer "payment_type"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
-    t.index ["wear_id"], name: "index_orders_on_wear_id"
   end
 
   create_table "shipment_orders", force: :cascade do |t|
@@ -93,11 +90,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_163842) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "wear_categories", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
+  create_table "wear_order_detail_sizes", force: :cascade do |t|
+    t.bigint "wear_order_id"
+    t.jsonb "size_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["wear_order_id"], name: "index_wear_order_detail_sizes_on_wear_order_id"
+  end
+
+  create_table "wear_orders", force: :cascade do |t|
+    t.bigint "wear_id"
+    t.bigint "order_id"
+    t.integer "classic_size"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_wear_orders_on_order_id"
+    t.index ["wear_id"], name: "index_wear_orders_on_wear_id"
   end
 
   create_table "wear_subcategories", force: :cascade do |t|

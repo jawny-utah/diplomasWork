@@ -1,0 +1,17 @@
+<div class="shadow-xl max-w-sm rounded-2xl p-9 flex flex-col transition bg-gray-100">
+  <h4 class="mb-8 text-center">Ваше замовлення</h4>
+  <% Order.last.wear_orders.each do |wear_order| %>
+    <% wear = wear_order.wear %>
+    <div class="flex gap-4">
+      <div>
+        <%= image_tag wear.image_name, class: "w-24" %>
+      </div>
+      <div class="flex flex-col">
+        <h5><%= wear.full_name %></h5>
+        <%= wear.price %>
+      </div>
+      <h4> <%= wear_order.quantity %> </h4>
+    </div>
+  <% end %>
+</div>
+

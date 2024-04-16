@@ -10,8 +10,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
-    <%= render template: "shared/footer" %>
+  <body data-controller="open-modal">
+    <div class="modal" data-open-modal-target="wrapper"></div>
+    <div class="container">
+      <%= yield %>
+      <%= render template: "shared/footer" %>
+    </div>
   </body>
 </html>

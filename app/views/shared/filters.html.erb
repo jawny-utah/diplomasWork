@@ -4,7 +4,7 @@
                 data: { controller: "filters", fitlers_target: "form", turbo_frame: "wears_table", turbo_action: "advance" }) do %>
     <div>
       <h4> Категорії </h4>
-      <%= radio_button_tag "subcategory", "", data: { action: "filters#submit" } %>
+      <%= radio_button_tag "subcategory", "", id: "subcategory_any", data: { action: "filters#submit" } %>
       <%= label_tag "subcategory_any", "Будь-яка" %>
       <%= render @categories %>
     </div>
