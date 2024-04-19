@@ -1,0 +1,44 @@
+<%= form_for @order, url: submit_order_path(@order), method: :put do |form| %>
+  <%= form.hidden_field :status, value: "created" %>
+  <%= form.fields_for :shipment_order, @order.shipment_order || @order.build_shipment_order do |shipment| %>
+    <div class="input-wrapper">
+      <%= shipment.label :customer_name, "Ваше ім'я *" %>
+      <%= shipment.text_field :customer_name, value: @order.user&.full_name || @order.shipment_order.customer_name, required: true %>
+    </div>
+    <div class="input-wrapper">
+      <%= shipment.label :customer_phone, "Номер телефону *" %>
+      <%= shipment.text_field :customer_phone, value: @order.user&.phone_number || @order.shipment_order.customer_phone, required: true %>
+    </div>
+    <div class="input-wrapper">
+      <%= shipment.label :customer_email, "Email *" %>
+      <%= shipment.text_field :customer_email, value: @order.user&.phone_number || @order.shipment_order.customer_email, required: true %>
+    </div>
+    <h5 class="mt-4 mb-2"> Доставка </h5>
+    <div class="input-wrapper">
+      <%= shipment.label :customer_town, "Місто доставки" %>
+      <%= shipment.select :customer_town, UkraineTown.all.map { |a| [a.name, a.name] }, { required: true, include_blank: true, prompt: "Оберіть місто" }, id: "slim-select" %>
+    </div>
+    <div class="flex flex-col gap-3">
+      <% ShipmentOrder::SHIPMENT_LOCALIZATION.each do |key, value| %>
+        <div>
+          <%= shipment.radio_button :shipment_type, key, required: true %>
+          <%= shipment.label :shipment_type, value, value: key %>
+        </div>
+      <% end %>
+    </div>
+    <h5 class="mt-4 mb-2"> Оплата </h5>
+    <div class="flex flex-col gap-3 mb-5">
+      <% Order::PAYMENT_LOCALIZATION.each do |key, value| %>
+        <div>
+          <%= form.radio_button :payment_type, key, required: true %>
+          <%= form.label :payment_type, value, value: key %>
+        </div>
+      <% end %>
+    </div>
+    <div class="input-wrapper">
+      <%= form.label :comment, "Коментар до замовлення" %>
+      <%= form.text_area :comment%>
+    </div>
+  <% end %>
+  <%= form.submit "Підтвердити замовлення" %>
+<% end %>

@@ -1,0 +1,7 @@
+<%= turbo_frame_tag :checkout_wear_order, class: "w-min" do %>
+  <%= render @wear_orders %>
+  <div class="mt-4 text-right">
+    <h5> Загальна вартість </h5>
+    <h5><%= order_total_price(@order) %></h5>
+  </div>
+<% end %>

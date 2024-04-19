@@ -1,0 +1,6 @@
+<%= turbo_stream.update :modal, partial: "shared/cart" %>
+<% if @order.nil? || @order.wear_orders.empty? %>
+  <%= turbo_stream.update :checkout_page, template: "checkouts/show" %>
+<% else %>
+  <%= turbo_stream.update :checkout_wear_order, partial: "checkouts/checkout_wear_order", collection: @wear_orders, as: :wear_order %>
+<% end %>

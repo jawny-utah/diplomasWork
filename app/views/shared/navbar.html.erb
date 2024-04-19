@@ -1,0 +1,20 @@
+<div class="bg-blue-200 px-5 py-4 flex mb-8">
+  <%= link_to root_path, class: "tracking-widest" do %>
+    <h4> BREAUX </h4>
+    <p> Спецодяг під ключ </p>
+  <% end %>
+  <div class="ml-auto flex gap-5 items-center">
+    <%= link_to "Головна", root_path, class: "default-link text-blue-600 text-xl" %>
+    <% if logged_in? %>
+      <%= link_to current_user.full_name, user_path(current_user), class: "default-link text-blue-600 text-xl" %>
+    <% else %>
+      <%= link_to "Увійти", new_user_path, class: "default-link text-blue-600 text-xl" %>
+    <% end %>
+    <%= link_to "#", class: "prevent-inner-click default-link text-blue-600 text-xl flex", data: { turbo: false, url: show_cart_modal_orders_path, action: "click->open-modal#view" } do %>
+      <p> Корзина </p>
+      <% if current_order && current_order.total_wear_count != 0 %>
+        <span class="bg-red-600 px-2 text-white rounded-xl ml-2"> <%= current_order.total_wear_count %> </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
