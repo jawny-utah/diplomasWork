@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   def index
-    @categories = Category.all
-    @brands = Brand.all
-    @colors = Color.all
+    @categories = Category.all.load_async
+    @brands = Brand.all.load_async
+    @colors = Color.all.load_async
     @pagy, @wears = pagy(filtered_wears)
   end
 

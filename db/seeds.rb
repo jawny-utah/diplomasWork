@@ -9,6 +9,12 @@ COLORS.each do |color|
   Color.create(title: color)
 end
 
+ukraine_towns = ["Київ", "Львів", "Харків", "Одеса", "Дніпро", "Запоріжжя", "Івано-Франківськ", "Ужгород", "Чернівці", "Суми", "Херсон", "Черкаси", "Полтава", "Рівне", "Тернопіль", "Вінниця", "Житомир", "Миколаїв", "Хмельницький", "Чернігів", "Кропивницький"]
+
+ukraine_towns.each do |town|
+  UkraineTown.create(name: town)
+end
+
 ActiveRecord::Base.transaction do
   worker_category = Category.create(title: "Робочий одяг")
   coats = worker_category.subcategories.create(title: "Куртки")

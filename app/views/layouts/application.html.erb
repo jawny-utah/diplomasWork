@@ -13,6 +13,7 @@
   <body data-controller="open-modal">
     <div class="modal" data-open-modal-target="wrapper"></div>
     <div class="container">
+      <%= render template: "shared/navbar" %>
       <%= yield %>
       <%= render template: "shared/footer" %>
     </div>

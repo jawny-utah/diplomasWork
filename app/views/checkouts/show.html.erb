@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :checkout_page do %>
+  <% if @order.nil? || @order.wear_orders.empty? %>
+    <h4> Ваша корзина порожня </h4>
+  <% else %>
+    <h4> Оформлення замовлення </h4>
+    <div class="flex justify-between gap-6">
+      <%= render partial: "checkouts/checkout_form" %>
+      <%= render partial: "checkouts/checkout_wear_order" %>
+    </div>
+  <% end %>
+<% end %>

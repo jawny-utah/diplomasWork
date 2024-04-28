@@ -6,14 +6,19 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "pages#index"
-  resources :wears do
-    member do
-      get :detail_size_show
-    end
-  end
+  resources :wears
   resources :orders do
     collection do
       get :show_cart_modal
+    end
+  end
+
+  resource :checkouts
+  put "/submit_order/:id", to: "checkouts#submit_order", as: "submit_order"
+  resources :wear_order_detail_sizes
+  resources :users do
+    collection do
+      post :login
     end
   end
 end

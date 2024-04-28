@@ -1,0 +1,29 @@
+<% size = wear_order_detail_size %>
+
+<div class="flex gap-20">
+  <div>
+    <p> Розмір: </p>
+    <p class="font-semibold">
+      <%= render partial: "wear_order_detail_sizes/size", locals: { size: size } %>
+    </p>
+  </div>
+  <div>
+    <p> Ціна за одиницю: </p>
+    <p class="font-semibold whitespace-nowrap"><%= size.wear_order.wear_price.to_s + " ₴" %></p>
+  </div>
+  <div>
+    <p> Кількість: </p>
+    <div class="flex gap-3">
+      <%= link_to "-", wear_order_detail_size_path(size, wear_order_detail_size: { quantity: size.quantity - 1 }), class: "py-1 px-3 rounded-md bg-slate-400", data: { turbo_method: :patch } %>
+      <%= form_for size do |form|%>
+        <%= form.text_field :quantity, value: size.quantity, class: "w-8 px-1 h-8", onchange: "this.form.requestSubmit()"%>
+      <% end %>
+      <%= link_to "+", wear_order_detail_size_path(size, wear_order_detail_size: { quantity: size.quantity + 1 }), class: "py-1 px-3 rounded-md bg-slate-300", data: { turbo_method: :patch } %>
+    </div>
+  </div>
+  <div>
+    <p> Вартість: </p>
+    <p class="font-semibold whitespace-nowrap"><%= size.order_price.to_s + " ₴" %></p>
+  </div>
+  <%= link_to "X", wear_order_detail_size_path(size), class: "text-red-600", data: { turbo_method: :delete } %>
+</div>

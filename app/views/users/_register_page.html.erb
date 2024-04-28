@@ -1,0 +1,29 @@
+<div class="w-auto block-wrapper">
+  <h5> Реєстрація нового користувача </h5>
+  <%= render template: "shared/flash", locals: { flash: flash[:error] } %>
+  <%= form_with model: @user, class: "flex flex-col" do |f| %>
+    <div class="input-wrapper">
+      <%= f.label :email, "Електронна пошта *" %>
+      <%= f.text_field :email, placeholder: "example@email.com", required: true %>
+    </div>
+    <div class="input-wrapper">
+      <%= f.label :full_name, "Повне ім'я *" %>
+      <%= f.text_field :full_name, placeholder: "Іван Шевченко", required: true %>
+    </div>
+    <div class="input-wrapper">
+      <%= f.label :phone_number, "Телефон *" %>
+      <%= f.text_field :phone_number, placeholder: "380991234141", required: true %>
+    </div>
+    <div class="input-wrapper">
+      <%= f.label :password, "Пароль *" %>
+      <%= f.text_field :password, type: :password, required: true  %>
+    </div>
+    <div class="input-wrapper">
+      <%= f.label :password_confirmation, "Повторіть пароль *" %>
+      <%= f.text_field :password_confirmation, type: :password, required: true %>
+    </div>
+    <div class="flex gap-4 mt-5 justify-end">
+      <%= f.submit "Створити", class: "button primary-button" %>
+    </div>
+  <% end %>
+</div>

@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.2"
 
 gem "bootsnap", require: false
+gem "bcrypt"
 gem "cssbundling-rails"
 gem "jbuilder"
 gem "jsbundling-rails"
@@ -32,3 +33,5 @@ end
 
 gem "faker"
 gem "pagy", "~> 6.2.0"
+
+gem "phonelib", "~> 0.8.8"

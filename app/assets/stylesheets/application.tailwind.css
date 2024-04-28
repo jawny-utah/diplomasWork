@@ -5,7 +5,25 @@
 @import "headers";
 @import "pagination";
 @import "inputs";
+@import "buttons";
+@import "slimselect";
 
 .container {
   @apply mx-auto px-8 md:px-14 py-9;
+}
+
+.default-link {
+  @apply font-semibold hover:underline;
+}
+
+.current-order * {
+  @apply w-1/4;
+}
+
+.prevent-inner-click * {
+  @apply pointer-events-none;
+}
+
+.absolute-centered {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }

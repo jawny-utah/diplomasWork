@@ -1,0 +1,8 @@
+<% if flash %>
+  <div class="flex flex-col">
+    <% flash.each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+    <% flash.clear %>
+  </div>
+<% end %>
