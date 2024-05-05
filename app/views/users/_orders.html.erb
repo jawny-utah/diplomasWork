@@ -1,0 +1,25 @@
+<div class="user-orders">
+  <h5 class="mb-4"> Ваші замовлення </h5>
+  <header class="font-semibold">
+    <div class="col">Замовлення</div>
+    <div class="col">Кількість товарів</div>
+    <div class="col">Дата</div>
+    <div class="col">Сума</div>
+    <div class="col">Статус</div>
+  </header>
+  <% @orders.each do |order| %>
+    <details>
+      <summary>
+        <div class="row">
+          <div class="col">№<%= order.id %></div>
+          <div class="col"><%= order.total_wear_count %></div>
+          <div class="col"><%= order.created_at %></div>
+          <div class="col"><%= order_total_price(order) %></div>
+          <div class="col"><%= order.status %></div>
+        </div>
+      </summary>
+      <%= render partial: "wear_orders/wear_order_no_controls", collection: order.wear_orders, as: :wear_order %>
+    </details>
+  <% end %>
+</div>
+<%= render template: "shared/pagy", locals: { pagy: @pagy } %>

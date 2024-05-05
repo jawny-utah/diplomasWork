@@ -1,0 +1,32 @@
+.user-orders {
+  summary {
+    @apply flex w-full cursor-pointer bg-blue-50 hover:bg-blue-100 items-center;
+  }
+
+  summary::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: url('icons/right-arrow.svg');
+    background-size: cover;
+    margin-left: -25px;
+    margin-right: 10px;
+    transition: 0.2s;
+  }
+
+  header {
+    @apply border-b border-solid border-gray-200;
+  }
+
+  .row {
+    @apply w-full h-14 items-center;
+  }
+
+  header, .row {
+    @apply flex;
+  }
+
+  .col {
+    flex: 1;
+  }
+}

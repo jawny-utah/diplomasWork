@@ -1,4 +1,8 @@
 <div class="flex justify-center gap-14">
-  <%= render partial: "users/login_page" %>
-  <%= render partial: "users/register_page" %>
+  <%= turbo_frame_tag :login_user, class: "w-auto block-wrapper h-fit" do %>
+    <%= render partial: "users/login_page" %>
+  <% end %>
+  <%= turbo_frame_tag :register_user, class: "w-auto block-wrapper h-fit" do %>
+    <%= render partial: "users/register_page" %>
+  <% end %>
 </div>

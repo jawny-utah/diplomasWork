@@ -2,6 +2,6 @@
   <p class="font-semibold whitespace-nowrap"> <%= size.classic_size %> </p>
 <% elsif size.size_details %>
   <% size.size_details.each do |key, value|%>
-    <p class="whitespace-nowrap"> <%= t("sizes.#{size.wear.subcategory.title}.#{key}") %>: <%= value %> </p>
+    <p class="whitespace-nowrap"> <%= t("sizes.#{size.wear.subcategory.title}.#{key}") %>: <%= value %> см. </p>
   <% end %>
 <% end %>

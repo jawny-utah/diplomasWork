@@ -14,3 +14,8 @@ window.addEventListener('turbo:frame-render', function (event) {
     select: '#slim-select'
   })
 })
+
+window.addEventListener("turbo:frame-missing", (event) => {
+  event.preventDefault();
+  window.location.reload();
+});

@@ -1,0 +1,28 @@
+.flash-wrapper {
+  @apply fixed select-none z-50 top-0 right-0 m-8 gap-y-3 flex flex-col;
+
+  animation: 0.6s ease-in-out slide_from_top;
+
+  .flash {
+    @apply w-fit opacity-100 transition-opacity font-medium flex py-1 px-3 rounded-md shadow-lg;
+
+    max-width: 260px;
+
+    &--notice {
+      @apply bg-green-400 text-gray-900;
+    }
+
+    &--hide {
+      @apply opacity-0;
+    }
+  }
+}
+
+@keyframes slide_from_top {
+  0% {
+    @apply -top-28;
+  }
+  100% {
+    @apply top-0;
+  }
+}

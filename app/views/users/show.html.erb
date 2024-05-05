@@ -1,3 +1,13 @@
-<h4> Сторінка користувача </h4>
-<h5><%= current_user.full_name %></h5>
-<%= link_to "Вийти", user_path(current_user), data: { turbo_method: :delete } %>
+<% if current_user %>
+  <h4 class="mb-5"> Сторінка користувача </h4>
+  <div class="flex gap-5">
+    <%= render partial: "users/sidebar" %>
+    <div class="w-full block-wrapper">
+      <% if @orders.empty? %>
+        <h5> Ви ще не робили замовлень </h5>
+      <% else %>
+        <%= render partial: "users/orders" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

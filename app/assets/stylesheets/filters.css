@@ -1,0 +1,17 @@
+.filters {
+  @apply flex flex-col pt-3 pb-5 rounded-lg px-6 bg-white shadow-lg mr-5 h-fit;
+
+  summary {
+    @apply flex items-center cursor-pointer bg-gray-100 -mx-6 px-6;
+  }
+
+  summary::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: url('icons/right-arrow.svg');
+    background-size: cover;
+    margin-left: 4px;
+    transition: 0.2s;
+  }
+}

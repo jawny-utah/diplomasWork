@@ -1,0 +1,9 @@
+<% if current_user %>
+  <h4 class="mb-5"> Сторінка користувача </h4>
+  <div class="flex gap-5">
+    <%= render partial: "users/sidebar" %>
+    <%= turbo_frame_tag :update_user, class: "w-auto block-wrapper" do %>
+      <%= render partial: "users/edit_form" %>
+    <% end %>
+  </div>
+<% end %>

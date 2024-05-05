@@ -1,0 +1,7 @@
+.wear {
+  @apply bg-white px-5 py-4 w-[24%] flex flex-col shadow-xl justify-between rounded-lg transition hover:scale-[101%];
+
+  img {
+    @apply rounded-lg bg-white mb-3 max-w-52 self-center;
+  }
+}

@@ -1,4 +1,4 @@
-<div class="flex flex-col py-3 px-6">
+<div class="filters">
   <h3> Фільтри </h3>
   <%= form_with(url: root_path, method: :get,
                 data: { controller: "filters", fitlers_target: "form", turbo_frame: "wears_table", turbo_action: "advance" }) do %>

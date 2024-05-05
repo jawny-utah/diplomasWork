@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
   helper_method :logged_in?
   helper_method :require_authorization
+  helper_method :already_authorized?
   include Pagy::Backend
 
   def set_current_user_hash
@@ -28,5 +29,9 @@ class ApplicationController < ActionController::Base
 
   def require_authorization
     redirect_to root_path unless logged_in?
+  end
+
+  def already_authorized?
+    redirect_to root_path if logged_in?
   end
 end

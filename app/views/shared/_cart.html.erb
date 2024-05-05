@@ -1,4 +1,4 @@
-<%= turbo_frame_tag :cart_order, class: "shadow-xl max-w-full rounded-2xl p-9 flex flex-col transition bg-gray-100" do %>
+<%= turbo_frame_tag :cart_order do %>
   <h4 class="mb-8 text-center">Ваше замовлення</h4>
   <% if current_order %>
     <div class="overflow-y-auto px-5 border-t border-solid border-gray-300">
@@ -13,11 +13,11 @@
         <h5> Загальна ціна: <%= order_total_price(current_order) %> </h5>
       </div>
     </div>
-    <div class="mt-6 ml-auto">
+    <div class="mt-6 text-right">
       <button data-action='click->open-modal#close' class="button-back">Повернутись</button>
       <%= link_to "Оформити замовлення", checkouts_path, class: "button-submit ml-3", data: { turbo: false } %>
     </div>
   <% else %>
-    <p class="absolute-centered whitespace-nowrap"> Ваша корзина порожня </p>
+    <p class="absolute-centered whitespace-nowrap mt-5"> Ваша корзина порожня </p>
   <% end %>
 <% end %>

@@ -2,25 +2,30 @@ class OrdersController < ApplicationController
   def create
     if logged_in?
       if current_order
-        current_order.update(order_params)
+        @order = current_order.update(order_params)
       else
         @order = Order.create(order_params)
       end
     else
       if cookies[:user_hash]
         if current_order.present?
-          current_order.update(order_params)
+          @order = current_order.update(order_params)
         else
-          Order.create(order_params.merge(uniq_user_hash: cookies[:user_hash]))
+          @order = Order.create(order_params.merge(uniq_user_hash: cookies[:user_hash]))
         end
       else
         cookies[:user_hash] = SecureRandom.hex(4)
-        Order.create(order_params.merge(uniq_user_hash: cookies[:user_hash]))
+        @order = Order.create(order_params.merge(uniq_user_hash: cookies[:user_hash]))
       end
     end
 
     respond_to do |format|
-      format.turbo_stream { render "orders/update_modal" }
+      format.turbo_stream do
+        if @order.valid?
+          flash.now[:notice] = "Товар додано в корзину"
+        end
+        render "orders/update_modal"
+      end
     end
   end
 
@@ -29,7 +34,12 @@ class OrdersController < ApplicationController
     @order.update(order_params)
 
     respond_to do |format|
-      format.turbo_stream { render "orders/update_modal" }
+      format.turbo_stream do
+        if @order.valid?
+          flash.now[:notice] = "Товар додано в корзину"
+        end
+        render "orders/update_modal"
+      end
     end
   end
 

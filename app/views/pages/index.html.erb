@@ -1,12 +1,17 @@
 <h3> Всі наявні товари </h3>
-<p> Всього товарів: <%= @wears.length %> </p>
 
 <div class="flex">
   <%= render template: "shared/filters" %>
-  <%= turbo_frame_tag :wears_table, class: "flex flex-col items-center" do %>
-    <div class="flex flex-wrap gap-3">
+  <%= turbo_frame_tag :wears_table, class: "flex flex-col items-center w-full" do %>
+    <p class="mb-2 text-sm self-end"> Всього товарів: <%= @wears.length %> </p>
+    <div class="flex flex-wrap gap-3 w-full">
       <%= render @wears %>
     </div>
-    <%= render template: "shared/pagy", locals: { pagy: @pagy } %>
+    <% if @wears.blank? %>
+      <h5> Не знайдено товарів за введеними фільтрами </h5>
+      <%= link_to "Скинути фільтри", root_path, class: "text-blue-700 hover:underline", data: { turbo: "false" } %>
+    <% else %>
+      <%= render template: "shared/pagy", locals: { pagy: @pagy } %>
+    <% end %>
   <% end %>
 </div>

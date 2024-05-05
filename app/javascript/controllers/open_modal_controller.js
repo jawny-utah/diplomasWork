@@ -57,8 +57,8 @@ export default class extends Controller {
   template() {
     return `
       <div data-open-modal-target='container'>
-        <div style='background-color: #9f9f9f8c; backdrop-filter: blur(4px);' class='modal-wrapper fixed top-0 right-0 w-full h-full rounded z-20 overflow-auto shadow-xl' data-open-modal-target='background' data-action='click->open-modal#closeBackground'>
-          <div style='display: flex; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 50%;' id='modal' data-open-modal-target='content'>
+        <div class='modal-wrapper' data-open-modal-target='background' data-action='click->open-modal#closeBackground'>
+          <div class='modal-content default-modal bg-white' id='modal' data-open-modal-target='content'>
           <span class='loader-spinner m-2'></span>
         </div>
 

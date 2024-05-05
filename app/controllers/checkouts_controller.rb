@@ -24,8 +24,7 @@ class CheckoutsController < ApplicationController
     return if @order.user.present?
 
     if current_user.nil?
-      if User.find_by(email: order_params[:shipment_order_attributes][:customer_email]).nil? ||
-        User.find_by(phone_number: order_params[:shipment_order_attributes][:customer_phone]).nil?
+      if User.find_by(email: order_params[:shipment_order_attributes][:customer_email]).nil? || User.find_by(phone_number: order_params[:shipment_order_attributes][:customer_phone]).nil?
         user_password = SecureRandom.hex(6)
         new_user = User.create(full_name: order_params[:shipment_order_attributes][:customer_name],
                                email: order_params[:shipment_order_attributes][:customer_email],
