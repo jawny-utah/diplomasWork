@@ -1,0 +1,5 @@
+<div class="flex-col flex whitespace-nowrap block-wrapper">
+  <%= link_to "Редагувати профіль", edit_user_path(@user), class: "text-blue-700 hover:text-blue-800 hover:underline" %>
+  <%= link_to "Ваші замовлення", user_path(@user), class: "text-blue-700 hover:text-blue-800 hover:underline" %>
+  <%= link_to "Вийти", user_path(@user), data: { turbo_method: :delete }, class: "text-red-700 hover:text-red-800 hover:underline" %>
+</div>

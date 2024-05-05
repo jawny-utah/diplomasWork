@@ -35,3 +35,5 @@ gem "faker"
 gem "pagy", "~> 6.2.0"
 
 gem "phonelib", "~> 0.8.8"
+
+gem "inline_svg", "~> 1.9"

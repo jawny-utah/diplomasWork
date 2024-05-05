@@ -19,4 +19,12 @@ export default class extends Controller {
     this.quantityTarget.value++
     this.checkboxTarget.checked = true
   }
+
+  changeCheckbox() {
+    if (this.checkboxTarget.checked && this.quantityTarget.value == "0") {
+      this.quantityTarget.value++
+    } else if (!this.checkboxTarget.checked && this.quantityTarget.value != "0") {
+      this.quantityTarget.value = 0
+    }
+  }
 }

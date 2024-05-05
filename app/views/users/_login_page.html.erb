@@ -1,17 +1,15 @@
-<div class="w-auto block-wrapper">
-  <h5> Увійти в особистий кабінет </h5>
-  <%= render template: "shared/flash", locals: { flash: flash[:error] } %>
-  <%= form_with url: login_users_path, class: "flex flex-col" do |f| %>
-    <div class="input-wrapper">
-      <%= f.label :email, "Електронна пошта *" %>
-      <%= f.text_field :email, placeholder: "example@email.com", required: true %>
-    </div>
-    <div class="input-wrapper">
-      <%= f.label :password, "Пароль *" %>
-      <%= f.text_field :password, type: :password, required: true  %>
-    </div>
-    <div class="flex gap-4 mt-5 justify-end">
-      <%= f.submit "Увійти", class: "button primary-button" %>
-    </div>
-  <% end %>
-</div>
+<h5 class="mb-3"> Увійти в особистий кабінет </h5>
+<%= render template: "shared/flash", locals: { flash: flash[:error] } %>
+<%= form_with url: login_users_path, class: "flex flex-col" do |f| %>
+  <div class="input-wrapper">
+    <%= f.label :email, "Електронна пошта *" %>
+    <%= f.text_field :email, placeholder: "example@email.com", required: true %>
+  </div>
+  <div class="input-wrapper">
+    <%= f.label :password, "Пароль *" %>
+    <%= f.text_field :password, type: :password, required: true  %>
+  </div>
+  <div class="flex gap-4 mt-5 justify-end">
+    <%= f.submit "Увійти", class: "button primary-button" %>
+  </div>
+<% end %>

@@ -1,7 +1,12 @@
-<%= link_to wear_path(wear), target: "_top", class: "bg-gray-200 px-4 py-2 w-[32%]" do %>
-  <% if wear.image_name %>
-    <%= image_tag wear.image_name %>
-  <% end %>
-  <h4><%= wear.full_name %></h4>
-  <p><%= wear.formatted_price %></p>
+<%= link_to wear_path(wear), target: "_top", class: "wear" do %>
+  <div class="flex flex-col">
+    <% if wear.image_name %>
+      <%= image_tag wear.image_name %>
+    <% end %>
+    <p><%= wear.full_name %></p>
+  </div>
+  <div class="flex flex-col text-base">
+    <b><%= wear.formatted_price %></b>
+    <button class="button button-submit mt-4" style="font-size: 16px"> Переглянути </button>
+  </div>
 <% end %>

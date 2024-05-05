@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IndividualWorkingClothes</title>
+    <title>BREAUX | Спецодяг на замовлення</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,10 +12,15 @@
 
   <body data-controller="open-modal">
     <div class="modal" data-open-modal-target="wrapper"></div>
-    <div class="container">
-      <%= render template: "shared/navbar" %>
-      <%= yield %>
-      <%= render template: "shared/footer" %>
+    <%= render template: "shared/navbar" %>
+    <div class="flash-wrapper" id="flash">
+      <% if flash.present? %>
+        <%= render partial: "shared/flash_popup", locals: { msg: flash[:notice], type: :notice } %>
+      <% end %>
     </div>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <%= render template: "shared/footer" %>
   </body>
 </html>

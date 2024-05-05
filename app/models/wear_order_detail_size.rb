@@ -33,6 +33,6 @@ class WearOrderDetailSize < ApplicationRecord
   end
 
   def classic_size_or_detail_size_should_be_present
-    errors.add(:base, "Розмір повинен бути присутній") if classic_size.nil? && size_details.nil?
+    errors.add(:base, "Розмір повинен бути присутній") if classic_size.nil? && size_details.empty?
   end
 end

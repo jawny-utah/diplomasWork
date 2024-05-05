@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import FiltersController from "./filters_controller"
 application.register("filters", FiltersController)
 
@@ -15,3 +12,6 @@ application.register("quantity-changer", QuantityChangersController)
 
 import OpenModalsController from "./open_modal_controller"
 application.register("open-modal", OpenModalsController)
+
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)

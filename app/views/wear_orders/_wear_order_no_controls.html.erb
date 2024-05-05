@@ -6,7 +6,7 @@
   <div class="flex flex-col">
     <h5><%= link_to wear.full_name, wear_path(wear), class: "hover:text-blue-700 hover:underline", data: { turbo: false } %></h5>
     <div class="flex flex-col gap-6 mt-3">
-      <%= render wear_order.wear_order_detail_sizes.order(:created_at) %>
+      <%= render partial: "wear_order_detail_sizes/wear_order_detail_size_no_controls", collection: wear_order.wear_order_detail_sizes.order(:created_at), as: :wear_order_detail_size %>
     </div>
   </div>
 </div>
