@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @orders = pagy(@user.orders.where.not(status: :draft))
+    @pagy, @orders = pagy(@user.orders.where.not(status: :draft).order(created_at: :desc))
   end
 
   def edit;end
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash.now[:notice] = "Зміни збережено"
-      redirect_to edit_user_path(@user)
     else
       flash[:error] = @user.errors.full_messages
       respond_to do |format|

@@ -37,3 +37,7 @@ gem "pagy", "~> 6.2.0"
 gem "phonelib", "~> 0.8.8"
 
 gem "inline_svg", "~> 1.9"
+
+gem "activeadmin", "~> 3.2"
+gem "sassc-rails"
+gem "activeadmin_blaze_theme"

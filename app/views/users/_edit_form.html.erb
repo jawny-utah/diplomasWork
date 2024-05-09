@@ -1,4 +1,5 @@
-<h5> Редагувати особисту інформацію </h5>
+<h5 class="mb-3"> Редагувати особисту інформацію </h5>
+<%= render template: "shared/flash", locals: { flash: flash[:error] } %>
 <%= form_for @user do |f| %>
   <div class="input-wrapper">
     <%= f.label :email, "Електронна пошта *" %>

@@ -1,6 +1,8 @@
+<%= render template: "shared/flash", locals: { flash: flash[:error] } %>
 <%= form_for @order, url: submit_order_path(@order), method: :put do |form| %>
   <%= form.hidden_field :status, value: "created" %>
   <%= form.fields_for :shipment_order, @order.shipment_order || @order.build_shipment_order do |shipment| %>
+    <%= shipment.hidden_field :current_user_id, value: current_user&.id %>
     <div class="input-wrapper">
       <%= shipment.label :customer_name, "Ваше ім'я *" %>
       <%= shipment.text_field :customer_name, value: @order.user&.full_name || @order.shipment_order.customer_name, required: true %>
@@ -11,7 +13,7 @@
     </div>
     <div class="input-wrapper">
       <%= shipment.label :customer_email, "Email *" %>
-      <%= shipment.text_field :customer_email, value: @order.user&.phone_number || @order.shipment_order.customer_email, required: true %>
+      <%= shipment.text_field :customer_email, value: @order.user&.email || @order.shipment_order.customer_email, required: true %>
     </div>
     <h5 class="mt-4 mb-2"> Доставка </h5>
     <div class="input-wrapper">

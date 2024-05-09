@@ -11,6 +11,14 @@ class WearOrder < ApplicationRecord
 
   validate :size_must_exist, on: :create
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "order_id", "updated_at", "wear_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["order", "wear", "wear_order_detail_sizes"]
+  end
+
   private
 
   def destroy_order_if_no_wear_order

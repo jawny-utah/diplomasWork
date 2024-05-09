@@ -2,9 +2,12 @@
   <% if @order.nil? || @order.wear_orders.empty? %>
     <h4> Ваша корзина порожня </h4>
   <% else %>
-    <h4> Оформлення замовлення </h4>
+    <h4 class="mb-4"> Оформлення замовлення </h4>
     <div class="flex justify-between gap-6">
-      <%= render partial: "checkouts/checkout_form" %>
+      <%= render template: "shared/flash", locals: { flash: flash[:error] } %>
+      <%= turbo_frame_tag :checkout_form do %>
+        <%= render partial: "checkouts/checkout_form" %>
+      <% end %>
       <%= render partial: "checkouts/checkout_wear_order" %>
     </div>
   <% end %>
