@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   helper_method :already_authorized?
   include Pagy::Backend
 
+  def authenticate_admin_user!
+    redirect_to root_path unless current_user.administrator?
+  end
+
   def set_current_user_hash
     cookies[:user_hash] = SecureRandom.hex(4) if cookies[:user_hash].nil?
   end

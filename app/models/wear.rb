@@ -21,4 +21,12 @@ class Wear < ApplicationRecord
   def formatted_price
     [price, "грн."].join(" ")
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["brand", "category", "color", "subcategory", "wear_order", "wear_subcategory"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["brand_id", "color_id", "created_at", "description", "id", "id_value", "image_name", "name", "price", "sex", "updated_at"]
+  end
 end

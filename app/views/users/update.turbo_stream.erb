@@ -1,0 +1,4 @@
+<%= turbo_stream.update :update_user, partial: "users/edit_form" %>
+<% if flash[:notice] %>
+  <%= turbo_stream.prepend "flash", partial: "shared/flash_popup", locals: { msg: flash[:notice] } %>
+<% end %>

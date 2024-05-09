@@ -26,6 +26,10 @@ class WearOrderDetailSize < ApplicationRecord
     quantity * wear_order.wear_price
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["classic_size", "created_at", "id", "id_value", "quantity", "size_details", "updated_at", "wear_order_id"]
+  end
+
   private
 
   def destroy_wear_order_if_no_size

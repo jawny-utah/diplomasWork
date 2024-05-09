@@ -12,7 +12,7 @@
             <% classic_size_id = [name.delete("/"), value].join("_") %>
             <div class="flex items-center" data-controller="quantity-changer">
               <%= hidden_field_tag "order[wear_orders_attributes][0][wear_id]", @wear.id %>
-              <%= hidden_field_tag "order[user_id]", current_user.id %>
+              <%= hidden_field_tag "order[user_id]", current_user&.id %>
               <%= check_box_tag "order[wear_orders_attributes][0][wear_order_detail_sizes_attributes][#{value}][classic_size]", name, id: classic_size_id, data: { quantity_changer_target: "checkbox", action: "click->quantity-changer#changeCheckbox" } %>
               <%= label_tag classic_size_id, name, class: "ml-2" %>
               <div class='flex items-center ml-8'>

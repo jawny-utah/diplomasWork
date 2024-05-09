@@ -7,19 +7,21 @@
     <div class="col">Сума</div>
     <div class="col">Статус</div>
   </header>
-  <% @orders.each do |order| %>
-    <details>
-      <summary>
-        <div class="row">
-          <div class="col">№<%= order.id %></div>
-          <div class="col"><%= order.total_wear_count %></div>
-          <div class="col"><%= order.created_at %></div>
-          <div class="col"><%= order_total_price(order) %></div>
-          <div class="col"><%= order.status %></div>
-        </div>
-      </summary>
-      <%= render partial: "wear_orders/wear_order_no_controls", collection: order.wear_orders, as: :wear_order %>
-    </details>
-  <% end %>
+  <div class="flex flex-col gap-3">
+    <% @orders.each do |order| %>
+      <details>
+        <summary>
+          <div class="row">
+            <div class="col">№<%= order.id %></div>
+            <div class="col"><%= order.total_wear_count %></div>
+            <div class="col"><%= order.created_at.strftime("%d.%m.%Y") %></div>
+            <div class="col"><%= order_total_price(order) %></div>
+            <div class="col"><%= Order::STATUS_LOCALIZATION[order.status] %></div>
+          </div>
+        </summary>
+        <%= render partial: "wear_orders/wear_order_no_controls", collection: order.wear_orders, as: :wear_order %>
+      </details>
+    <% end %>
+  </div>
 </div>
 <%= render template: "shared/pagy", locals: { pagy: @pagy } %>

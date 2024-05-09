@@ -15,6 +15,16 @@ class Order < ApplicationRecord
     details_payment: "Оплата за реквізитами"
   }
 
+  STATUS_LOCALIZATION = {
+    draft: "На початку створення",
+    created: "Створений",
+    paid: "Оплачений",
+    processing: "Пакується",
+    shipped: "Відправлений",
+    done: "Виконаний",
+    canceled: "Відмінений"
+  }.with_indifferent_access
+
   def total_price
     wear_orders.sum { |wear_order| wear_order.wear_order_detail_sizes.sum(&:order_price) }
   end
@@ -46,6 +56,14 @@ class Order < ApplicationRecord
         self.wear_orders.build(attr)
       end
     end
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["shipment_order", "user", "wear_orders"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["comment", "created_at", "id", "id_value", "payment_type", "status", "uniq_user_hash", "updated_at", "user_id"]
   end
 
   private

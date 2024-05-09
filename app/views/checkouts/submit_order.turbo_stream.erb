@@ -1,0 +1,5 @@
+<% if flash[:error] %>
+  <%= turbo_stream.update :checkout_form, partial: "checkouts/checkout_form" %>
+<% else %>
+  <%= turbo_stream.update :checkout_page, partial: "orders/submit_order" %>
+<% end %>
