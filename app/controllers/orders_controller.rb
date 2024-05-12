@@ -2,14 +2,14 @@ class OrdersController < ApplicationController
   def create
     if logged_in?
       if current_order
-        @order = current_order.update(order_params)
+        @order = current_order.tap { |a| a.update(order_params) }
       else
         @order = Order.create(order_params)
       end
     else
       if cookies[:user_hash]
         if current_order.present?
-          @order = current_order.update(order_params)
+          @order = current_order.tap { |a| a.update(order_params) }
         else
           @order = Order.create(order_params.merge(uniq_user_hash: cookies[:user_hash]))
         end

@@ -8,10 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
   </head>
 
   <body data-controller="open-modal">
-    <div class="modal" data-open-modal-target="wrapper"></div>
+    <div class="modal" data-open-modal-target="wrapper" data-action="keydown@window->open-modal#closeWithKeyboard"></div>
     <%= render template: "shared/navbar" %>
     <div class="flash-wrapper" id="flash">
       <% if flash.present? %>

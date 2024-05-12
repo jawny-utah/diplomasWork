@@ -1,3 +1,5 @@
-<div class="flash flash--notice" data-controller="flash" data-flash-target="flashBody" data-action="click->flash#destroyElement">
-  <%= msg %>
-</div>
+<% unless msg.nil? %>
+  <div class="flash flash--notice" data-controller="flash" data-flash-target="flashBody" data-action="click->flash#destroyElement">
+    <%= msg %>
+  </div>
+<% end %>

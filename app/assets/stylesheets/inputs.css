@@ -3,7 +3,7 @@
 }
 
 .button-back {
-  @apply bg-gray-200 text-gray-700 font-semibold text-xl px-3 py-1 rounded-md cursor-pointer;
+  @apply bg-gray-200 text-gray-700 font-semibold text-xl px-3 py-1 rounded-md cursor-pointer hover:bg-gray-300;
 }
 
 .input-wrapper {

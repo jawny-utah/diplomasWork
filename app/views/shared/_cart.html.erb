@@ -1,7 +1,7 @@
 <%= turbo_frame_tag :cart_order do %>
   <h4 class="mb-8 text-center">Ваше замовлення</h4>
   <% if current_order %>
-    <div class="overflow-y-auto px-5 border-t border-solid border-gray-300">
+    <div class="overflow-y-auto max-h-80 px-5 border-t border-solid border-gray-300">
       <%= render current_order.wear_orders %>
     </div>
     <div class="flex flex-col gap-3 mt-auto">
@@ -18,6 +18,9 @@
       <%= link_to "Оформити замовлення", checkouts_path, class: "button-submit ml-3", data: { turbo: false } %>
     </div>
   <% else %>
-    <p class="absolute-centered whitespace-nowrap mt-5"> Ваша корзина порожня </p>
+    <div class="text-center whitespace-nowrap mt-5">
+      <p> Ваша корзина порожня </p>
+      <button data-action='click->open-modal#close' class="button-back mt-8">Повернутись</button>
+    </div>
   <% end %>
 <% end %>

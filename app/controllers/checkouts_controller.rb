@@ -13,7 +13,7 @@ class CheckoutsController < ApplicationController
     if @order.update(order_params)
       create_user_if_non_found
     else
-      flash[:error] = @order.errors.full_messages
+      flash[:error] = @order.errors.full_messages.map { |a| a.gsub("Shipment order ", "") }
     end
 
     respond_to do |format|
