@@ -20,6 +20,11 @@
       <%= shipment.label :customer_town, "Місто доставки" %>
       <%= shipment.select :customer_town, UkraineTown.all.map { |a| [a.name, a.name] }, { required: true, include_blank: true, prompt: "Оберіть місто" }, id: "slim-select" %>
     </div>
+    <script>
+      new SlimSelect({
+        select: '#slim-select'
+      })
+    </script>
     <div class="flex flex-col gap-3">
       <% ShipmentOrder::SHIPMENT_LOCALIZATION.each do |key, value| %>
         <div>

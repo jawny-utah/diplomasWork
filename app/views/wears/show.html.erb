@@ -7,7 +7,7 @@
         <h4><%= @wear.full_name %></h4>
         <h5 class="mt-3 mb-8"> Ціна: <%= @wear.price %> ₴ </h5>
         <h5>Виберіть розмір та вкажіть потрібну кількість</h5>
-        <div>
+        <div id="default-sizes">
           <% WearOrderDetailSize.classic_sizes.each do |name, value| %>
             <% classic_size_id = [name.delete("/"), value].join("_") %>
             <div class="flex items-center" data-controller="quantity-changer">
@@ -17,7 +17,7 @@
               <%= label_tag classic_size_id, name, class: "ml-2" %>
               <div class='flex items-center ml-8'>
                 <button type="button" class='py-1 px-3 rounded-md bg-slate-400' data-action="click->quantity-changer#minus">-</button>
-                <%= text_field_tag "order[wear_orders_attributes][0][wear_order_detail_sizes_attributes][#{value}][quantity]", 0, class: "p-2 w-9", data: { quantity_changer_target: "quantity" }%>
+                <%= text_field_tag "order[wear_orders_attributes][0][wear_order_detail_sizes_attributes][#{value}][quantity]", 0, class: "p-2 w-9", data: { action: "input->quantity-changer#updateQuantity", quantity_changer_target: "quantity" }%>
                 <button type="button" class='py-1 px-3 rounded-md bg-slate-300' data-action="click->quantity-changer#plus">+</button>
               </div>
             </div>
@@ -26,7 +26,7 @@
         </div>
       <% end %>
     </div>
-    <%= form_for @order, html: { class: "ml-8 block-wrapper" } do |form| %>
+    <%= form_for @order, html: { class: "ml-8 block-wrapper", id: "custom-sizes" } do |form| %>
       <h4 class="mb-3"> Або вкажіть власні заміри </h4>
       <%= render partial: "wears/detail_size_show", locals: { form: form } %>
       <%= form.submit "Купити", class: "mt-4", data: { action: "click->open-modal#view" } %>

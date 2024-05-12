@@ -34,6 +34,15 @@ uk:
         restrict_dependent_destroy:
           has_one: 'Неможливо видалити запис, так як існує залежність: %{record}'
           has_many: 'Неможливо видалити запис, так як існують залежності: %{record}'
+    attributes:
+      user:
+        password: "Пароль"
+        password_confirmation: "Пароль"
+        phone_number: "Номер телефону"
+        email: "Email"
+      shipment_order:
+        customer_phone: "Номер телефону"
+        customer_email: "Email"
   date:
     abbr_day_names:
     - нд.

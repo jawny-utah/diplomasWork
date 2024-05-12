@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :phone_number, phone: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, :phone_number, uniqueness: true, presence: true
-  validates :password, :password_digest, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, if: ->(record) { record.new_record? || record.password.present? || record.password_confirmation.present?  }
 
   has_many :orders, dependent: :destroy
   # has_many :notificaitons, dependent: :destroy
