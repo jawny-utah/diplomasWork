@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_182928) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_13_182029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,25 +44,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_182928) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "materials", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.decimal "price_per_square_meter"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "title", null: false
-    t.string "description", null: false
-    t.string "link_to", null: false
-    t.boolean "read", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -153,6 +134,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_182928) do
     t.string "image_name"
     t.bigint "color_id"
     t.bigint "brand_id"
+    t.string "material"
   end
 
 end
