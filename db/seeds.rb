@@ -23,18 +23,6 @@ ActiveRecord::Base.transaction do
   jeans = worker_category.subcategories.create(title: "Штани")
   costumes = worker_category.subcategories.create(title: "Костюми")
 
-  half_comb = Wear.create(
-    name: "Напівкомбінезон",
-    description: "Практичний і функційний робочий одяг для півночі, призначений для професійної діяльності й побуту. Можна використовувати як окремий елемент спорядження, а також у комплекті з утепленим спецодягом для роботи просто неба й у приміщеннях.",
-    price: Faker::Commerce.price(range: 1000..1300.0),
-    brand: Brand.all.sample,
-    color: Color.all.sample,
-    sex: rand(0..1),
-    image_name: "wears/worker_combinezone.webp"
-  )
-
-  half_comb.subcategory = costumes
-
   coat = Wear.create(
     name: "Куртка",
     description: "Використовують як окремий елемент робочого спорядження та в комплекті із зимовою курткою для роботи за низької температури просто неба й у прохолодних приміщеннях.
@@ -174,4 +162,94 @@ ActiveRecord::Base.transaction do
   )
 
   jilet_worker.subcategory = jilets
+
+  protective_category = Category.create(title: "Захисний одяг")
+  water_protected = protective_category.subcategories.create(title: "Костюми")
+  short_term_cloth = protective_category.subcategories.create(title: "Куртки")
+
+  waterproffed_costume = Wear.create(
+    name: "Костюм вологозахисний",
+    description: "Поліестер із ПВХ-покриттям.
+    Двостороннє покриття.
+    Пропаяні шви.
+    КУРТКА: Ушивний капюшон.
+    Блискава з вітрозахисною планкою на кнопках.
+    Рукава-реглан.
+    По низу рукавів внутрішні манжети для захисту від вітру.
+    2 кишені.",
+    price: Faker::Commerce.price(range: 800..1000.0),
+    brand: Brand.all.sample,
+    color: Color.all.sample,
+    sex: rand(0..1),
+    image_name: "wears/water_protected_costume.webp"
+  )
+
+  waterproffed_costume.subcategory = water_protected
+
+  waterproffed_costume_green = Wear.create(
+    name: "Костюм вологозахисний",
+    description: "Поліестер із ПВХ-покриттям.
+    Двостороннє покриття.
+    Пропаяні шви.
+    КУРТКА: Ушивний капюшон.
+    Блискава з вітрозахисною планкою на кнопках.
+    Рукава-реглан.
+    По низу рукавів внутрішні манжети для захисту від вітру.
+    2 кишені.",
+    price: Faker::Commerce.price(range: 800..1000.0),
+    brand: Brand.all.sample,
+    color: Color.all.sample,
+    sex: rand(0..1),
+    image_name: "wears/water_protected_costume_green.webp"
+  )
+
+  waterproffed_costume_green.subcategory = water_protected
+
+  protective_coat =  Wear.create(
+    name: "Куртка світлоповертаюча",
+    description: "Оскільки куртка належить до сигнального спецодягу, вона має яскраво-помаранчевий колір і світловідбивні елементи спереду, ззаду й на рукавах. Шви проклеєно, щоб волога не потрапила під куртку. У комірі є прихований капюшон. Рукава мають стяжку для максимального захисту від вітру. Кишені закриваються на кнопки.",
+    price: Faker::Commerce.price(range: 800..1000.0),
+    brand: Brand.all.sample,
+    color: Color.all.sample,
+    sex: rand(0..1),
+    image_name: "wears/protective_orange_coat.webp"
+  )
+
+  protective_coat.subcategory = short_term_cloth
+
+  medical_category = Category.create(title: "Медичний одяг")
+  medical_costume_category = medical_category.subcategories.create(title: "Костюми")
+  medical_pants_category = medical_category.subcategories.create(title: "Штани")
+
+  medical_costume =  Wear.create(
+    name: "Костюм комфорт",
+    description: "Назва: Костюм чоловічий 'Комфорт'  з брюками С-321/С-9
+    Код за каталогом: 1032100915
+    Тканина: Сорочка
+    Склад: 35% - бавовна, 65% -ПЕ
+    Щільність: 115 г/м2",
+    price: Faker::Commerce.price(range: 800..1000.0),
+    brand: Brand.all.sample,
+    color: Color.all.sample,
+    sex: rand(0..1),
+    image_name: "wears/medical_costume.webp"
+  )
+
+  medical_costume.subcategory = medical_costume_category
+
+  medical_pants =  Wear.create(
+    name: "Штани комфорт",
+    description: "Назва: Штани комфорт з брюками С-295Б / С-178А
+    Код за каталогом: 1029517814
+    Тканина: Сорочка Універсал
+    Склад: 35% - бавовна, 65% - ПЕ
+    Щільність: 115 г/м2",
+    price: Faker::Commerce.price(range: 800..1000.0),
+    brand: Brand.all.sample,
+    color: Color.all.sample,
+    sex: rand(0..1),
+    image_name: "wears/medical_pants.webp"
+  )
+
+  medical_pants.subcategory = medical_pants_category
 end

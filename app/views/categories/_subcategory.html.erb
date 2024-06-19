@@ -2,6 +2,6 @@
 <% current_field_parameter = params[subcategory.class.to_s.downcase] || [] %>
 
 <div>
-  <%= radio_button_tag "#{subcategory.class.to_s.downcase}", subcategory.title, current_field_parameter.include?(subcategory.title), id: checkbox_name, data: { action: "filters#submit" } %>
+  <%= radio_button_tag "#{subcategory.class.to_s.downcase}", [subcategory.category.title, subcategory.title].join(", "), current_field_parameter.include?(subcategory.title), id: checkbox_name, data: { action: "filters#submit" } %>
   <%= label_tag checkbox_name, subcategory.title %>
 </div>

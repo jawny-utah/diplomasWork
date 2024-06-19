@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, :validate_correct_current_user, only: %i(show edit update)
   before_action :already_authorized?, only: %i(new create login)
+  before_action :require_authorization, except: %i(login new create)
 
   def new
     @user = User.new
@@ -65,7 +66,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user ||= User.find_by(id: params[:id])
   end
 
   def validate_correct_current_user
@@ -73,6 +74,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:full_name, :email, :phone_number, :address, :password, :password_confirmation)
+    params.require(:user).permit(:full_name, :email, :phone_number, :password, :password_confirmation)
   end
 end
