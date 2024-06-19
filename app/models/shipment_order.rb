@@ -28,11 +28,11 @@ class ShipmentOrder < ApplicationRecord
   def user_should_be_loggined_if_exists
     return if current_user_id.present?
 
-    errors.add(:base, "Користувач з введеним email вже зареєстрований, будь ласка, увійдіть в аккаунт.") if find_by_user_by_email
+    errors.add(:base, "Користувач з введеним email вже зареєстрований, будь ласка, увійдіть в аккаунт.") if find_user_by_email
     errors.add(:base, "Користувач з введеним телефоном вже зареєстрований, будь ласка, увійдіть в аккаунт.") if find_user_by_phone
   end
 
-  def find_by_user_by_email
+  def find_user_by_email
     User.find_by(email: customer_email)
   end
 

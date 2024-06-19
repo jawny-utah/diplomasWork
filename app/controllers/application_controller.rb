@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   def authenticate_admin_user!
-    redirect_to root_path unless current_user.administrator?
+    redirect_to root_path unless current_user&.administrator?
   end
 
   def set_current_user_hash

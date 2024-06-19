@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "pages#index"
+  resources :pages do
+    collection do
+      get :delivery_info
+      get :payment_info
+    end
+  end
   resources :wears
   resources :orders do
     collection do

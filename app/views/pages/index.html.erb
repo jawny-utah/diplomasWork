@@ -2,16 +2,24 @@
 
 <div class="flex">
   <%= render template: "shared/filters" %>
-  <%= turbo_frame_tag :wears_table, class: "flex flex-col items-center w-full" do %>
-    <p class="mb-2 text-sm self-end"> Всього товарів: <%= @wears.length %> </p>
-    <div class="flex flex-wrap gap-3 w-full">
-      <%= render @wears %>
-    </div>
-    <% if @wears.blank? %>
-      <h5> Не знайдено товарів за введеними фільтрами </h5>
-      <%= link_to "Скинути фільтри", root_path, class: "text-blue-700 hover:underline", data: { turbo: "false" } %>
-    <% else %>
-      <%= render template: "shared/pagy", locals: { pagy: @pagy } %>
+  <div class="w-full">
+    <%= form_with url: root_path, method: :get, data: { controller: "search-submit", turbo_frame: "wears_table" } do |form| %>
+      <div class="input-wrapper">
+        <%= form.label :full_name, "Пошук" %>
+        <%= form.search_field :full_name, placeholder: "Введіть назву товару", data: { action: "input->search-submit#search" } %>
+      </div>
     <% end %>
-  <% end %>
+    <%= turbo_frame_tag :wears_table, class: "flex flex-col items-center w-full" do %>
+      <p class="mb-2 text-sm self-end"> Всього товарів: <%= @final_relation.length %> </p>
+      <div class="flex flex-wrap gap-3 w-full">
+        <%= render @wears %>
+      </div>
+      <% if @wears.blank? %>
+        <h5> Не знайдено товарів за введеними фільтрами </h5>
+        <%= link_to "Скинути фільтри", root_path, class: "text-blue-700 hover:underline", data: { turbo: "false" } %>
+      <% else %>
+        <%= render template: "shared/pagy", locals: { pagy: @pagy } %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

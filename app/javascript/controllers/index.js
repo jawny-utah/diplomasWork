@@ -15,3 +15,6 @@ application.register("open-modal", OpenModalsController)
 
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
+
+import SearchSubmitController from "./search_submit"
+application.register("search-submit", SearchSubmitController)

@@ -8,6 +8,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 gem "jsbundling-rails"
 gem "pg", "~> 1.1"
+gem 'pg_search'
 gem "puma", ">= 5.0"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "redis", ">= 4.0.1"

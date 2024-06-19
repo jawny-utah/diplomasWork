@@ -7,7 +7,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, if: ->(record) { record.new_record? || record.password.present? || record.password_confirmation.present?  }
 
   has_many :orders, dependent: :destroy
-  # has_many :notificaitons, dependent: :destroy
 
   enum role: %i(default administrator)
 
@@ -16,6 +15,6 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["address", "created_at", "email", "full_name", "id", "id_value", "password_digest", "phone_number", "role", "uniq_hash", "updated_at"]
+    ["created_at", "email", "full_name", "id", "id_value", "password_digest", "phone_number", "role", "uniq_hash", "updated_at"]
   end
 end
