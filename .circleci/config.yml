@@ -1,56 +1,68 @@
-version: 2.0 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    parallelism: 1 # run three instances of this job in parallel
-    docker: # run the steps with Docker
-      - image: circleci/ruby:3.2.2 # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: postgres
-          RAILS_ENV: test
-      - image: circleci/postgres:11 # database image
-        environment: # environment variables for database, it is kind of obvious but it is important that they match with your test config in database.yml
-          POSTGRES_USER: sheva
-          POSTGRES_DB: sheva
-          POSTGRES_PASSWORD: password
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      # Which version of bundler?
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.0
+  node: circleci/node@5.2.0
+  browser-tools: circleci/browser-tools@1.4.8
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.2.2
+    steps:
+      - checkout
+      - ruby/install-deps
+      # Store bundle cache
+      - node/install:
+          install-yarn: true
+          node-version: '20.12.2'
+      - run: node --version
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:3.2.2
+      - image: cimg/postgres:15.6
+        environment:
+          POSTGRES_USER: individual-clothes
+          POSTGRES_DB: individual_working_clothes_test
+          POSTGRES_PASSWORD: ""
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: individual-clothes
+      PGPASSWORD: ""
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install:
+          install-yarn: true
+          node-version: '20.12.2'
+      - run: node --version
+      - browser-tools/install-chrome:
+        chrome-version: 125.0.6422.60
+      - browser-tools/install-chromedriver
       - run:
-          name: Which bundler?
-          command: bundle -v
-      # Restore bundle cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-      - restore_cache:
-          keys:
-            - individual-working-clothes-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - individual-working-clothes-bundle-v2-
-      - run: # Install Ruby dependencies
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
-      # Store bundle cache for Ruby dependencies
-      - save_cache:
-          key: individual-working-clothes-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database setup
-          command: bin/rails db:schema:load --trace
-      - run:
-          name: Run rspec in parallel
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      # Save test results for timing analysis
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - ruby/rspec-test
+      - ruby/rubocop-check
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
