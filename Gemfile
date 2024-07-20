@@ -29,10 +29,11 @@ end
 
 group :test do
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "~> 4.22.0"
   gem "webdrivers"
   gem "rspec"
   gem "rspec-rails"
+  gem "rspec_junit_formatter"
 end
 
 gem "faker"
