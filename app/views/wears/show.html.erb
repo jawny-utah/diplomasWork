@@ -27,7 +27,8 @@
       <% end %>
     </div>
     <%= form_for @order, html: { class: "ml-8 block-wrapper", id: "custom-sizes" } do |form| %>
-      <h4 class="mb-3"> Або вкажіть власні заміри </h4>
+      <h4 class="mb-1"> Або вкажіть власні заміри </h4>
+      <p class="text-sm mb-3">При замовленні за власними замірами фінальна ціна може відрізнятися</p>
       <%= render partial: "wears/detail_size_show", locals: { form: form } %>
       <%= form.submit "Купити", class: "mt-4", data: { action: "click->open-modal#view" } %>
     <% end %>
